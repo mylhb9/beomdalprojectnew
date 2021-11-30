@@ -28,16 +28,24 @@ public class Food {
     private String name;
 
     @Column
-    private Long price;
+    private int price;
 
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="restaurant_id")
+    @JoinColumn(name="restaurantId")
     private Restaurant restaurant;
 
     public Food(FoodDto foodDto) {
+        this.name = foodDto.getName();
+        this.price = foodDto.getPrice();
 
+
+    }
+    public Food(FoodDto foodDto, Restaurant restaurant) {
+        this.name = foodDto.getName();
+        this.price = foodDto.getPrice();
+        this.restaurant = restaurant;
     }
 
 }

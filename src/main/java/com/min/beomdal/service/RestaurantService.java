@@ -6,7 +6,7 @@ import com.min.beomdal.entity.Restaurant;
 import com.min.beomdal.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
+
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class RestaurantService {
         if(restaurantDto.getDeliveryFee() < 0 || restaurantDto.getDeliveryFee() > 10000) {
             throw new IllegalStateException("허용 값 범위를 벗어났습니다.");
         }
-        if(restaurantDto.getMinOrderPrice()%500>0) {
+        if(restaurantDto.getDeliveryFee()%500>0) {
             throw new IllegalStateException("500원 단위가 아닙니다");
         }
         Restaurant restaurant = new Restaurant(restaurantDto);
