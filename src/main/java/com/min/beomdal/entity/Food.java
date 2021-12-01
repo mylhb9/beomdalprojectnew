@@ -4,6 +4,7 @@ package com.min.beomdal.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.min.beomdal.dto.FoodDto;
 
+import com.min.beomdal.dto.FoodResponseDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import lombok.ToString;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @ToString
@@ -32,8 +34,8 @@ public class Food {
 
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="restaurantId")
+    @ManyToOne(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
+    @JoinColumn(name="restaurant_id")
     private Restaurant restaurant;
 
     public Food(FoodDto foodDto) {
@@ -48,4 +50,9 @@ public class Food {
         this.restaurant = restaurant;
     }
 
+    public Food(FoodResponseDto foodResponseDto, Restaurant restaurant) {
+        this.name = foodResponseDto.getName();
+        this.price= foodResponseDto.getPrice();
+        this.restaurant = restaurant;
+    }
 }

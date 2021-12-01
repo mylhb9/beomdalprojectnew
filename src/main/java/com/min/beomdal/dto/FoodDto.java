@@ -1,8 +1,6 @@
 package com.min.beomdal.dto;
 
 
-import com.min.beomdal.entity.Food;
-import com.min.beomdal.entity.Restaurant;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

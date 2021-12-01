@@ -1,6 +1,8 @@
 package com.min.beomdal.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.min.beomdal.dto.OrderDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,36 +18,20 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name="orderss")
+@Table(name="orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderId;
-//
-//    @Column
-//    private String restaurantName;
-//
-//    @Column
-//    private Long deliveryFee;
-//
-//    @Column
-//    private Long totalPrice;
-//
-//    @Column
-//    private Long restaurantId;
-//
-//
-//
-//
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn
-//    private List<Food> foodList;
-//
+    private Long id;
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
+    @JoinColumn(name="restaurant_id")
+    private Restaurant restaurant;
 
-
-
-
+    public Order(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
 
 
 

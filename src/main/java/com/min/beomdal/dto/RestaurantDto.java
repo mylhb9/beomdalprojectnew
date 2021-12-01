@@ -17,8 +17,8 @@ public class RestaurantDto {
     private String name;
 
 
-    private Long minOrderPrice;
+    private int minOrderPrice;
 
 
-    private Long deliveryFee;
+    private int deliveryFee;
 }

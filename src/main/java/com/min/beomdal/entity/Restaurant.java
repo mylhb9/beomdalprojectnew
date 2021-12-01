@@ -25,10 +25,10 @@ public class Restaurant {
     private String name;
 
     @Column
-    private Long minOrderPrice;
+    private int minOrderPrice;
 
     @Column
-    private Long deliveryFee;
+    private int deliveryFee;
 
 
 
