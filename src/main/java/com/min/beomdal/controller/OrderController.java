@@ -3,6 +3,7 @@ package com.min.beomdal.controller;
 
 import com.min.beomdal.dto.OrderRequestDto;
 import com.min.beomdal.dto.OrderResponseDto;
+import com.min.beomdal.entity.Menu;
 import com.min.beomdal.entity.Order;
 import com.min.beomdal.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -26,10 +27,10 @@ public class OrderController {
 
 
     //주문조회
-//    @GetMapping("/orders")
-//    public List<Order> getorders() {
-//        return orderService.getAllOrders();
-//    }
+    @GetMapping("/orders")
+    public List<OrderResponseDto> getorders() {
+        return orderService.getAllOrders();
+    }
 
 
 }

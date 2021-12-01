@@ -29,8 +29,12 @@ public class Order {
     @JoinColumn(name="restaurant_id")
     private Restaurant restaurant;
 
-    public Order(Restaurant restaurant) {
+    @Column
+    private int totalprice;
+
+    public Order(Restaurant restaurant, int totalprice) {
         this.restaurant = restaurant;
+        this.totalprice = totalprice;
     }
 
 

@@ -2,10 +2,6 @@ package com.min.beomdal.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.min.beomdal.dto.MenuDto;
-import com.min.beomdal.dto.OrderDto;
-import com.min.beomdal.dto.OrderRequestDto;
-import com.min.beomdal.dto.OrderResponseDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

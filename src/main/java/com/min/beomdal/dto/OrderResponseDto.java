@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderResponseDto {
     private String restaurantName;
-    private List<FoodResponseDto> foodList;
+    private List<FoodResponseDto> foods;
     private int deliveryFee;
     private int totalPrice;
 

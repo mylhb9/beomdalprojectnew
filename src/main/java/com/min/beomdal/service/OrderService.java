@@ -26,6 +26,7 @@ public class OrderService {
     private final MenuRepository menuRepository;
     private final RestaurantRepository restaurantRepository;
     private final FoodRepository foodRepository;
+    private final OrderRepository orderRepository;
 
     public OrderResponseDto saveOrder(OrderRequestDto orderRequestDto) {
         System.out.println(orderRequestDto);
@@ -46,15 +47,24 @@ public class OrderService {
 
         }
         for(int i=0; i<foodResponseDtos.size(); i++) {
+            if(foodResponseDtos.get(i).getQuantity()<1 || foodResponseDtos.get(i).getQuantity()>100) {
+                throw new IllegalStateException("1~100 아님");
+            }
+
             totalPrice += foodResponseDtos.get(i).getPrice() * foodResponseDtos.get(i).getQuantity();
+            foodResponseDtos.get(i).setPrice(foodResponseDtos.get(i).getPrice() * foodResponseDtos.get(i).getQuantity());
+
         }
+        if(totalPrice < restaurant.getMinOrderPrice()) {
+            throw new IllegalStateException("최소주문가격은 시켜주셈");
+        }
+        totalPrice = totalPrice + restaurant.getDeliveryFee();
+
+
         System.out.println(totalPrice);
         OrderResponseDto orderResponseDto = new OrderResponseDto(restaurant.getName(), foodResponseDtos, restaurant.getDeliveryFee(), totalPrice);
 
-        Order order = new Order(restaurant);
-
-
-
+        Order order = new Order(restaurant, totalPrice);
 
 
         List<Menu> menus = new ArrayList<>();
@@ -66,5 +76,31 @@ public class OrderService {
         return orderResponseDto;
     }
 
+    public List<OrderResponseDto> getAllOrders() {
+        List<Menu> menuList = menuRepository.findAll();
+        System.out.println(menuList);
+        List<Order> orderList = orderRepository.findAll();
+        System.out.println(orderList);
+        List<OrderResponseDto> orderResponseDtos = new ArrayList<>();
+        List<FoodResponseDto> foodResponseDtos = new ArrayList<>();
 
+        for(int i=0; i< menuList.size(); i++) {
+
+
+            foodResponseDtos.add(new FoodResponseDto(menuList.get(i).getFood().getName(), menuList.get(i).getQuantity(), menuList.get(i).getFood().getPrice() * menuList.get(i).getQuantity()));
+
+        }
+
+        for (int i=0; i<orderList.size(); i++) {
+            orderResponseDtos.add(new OrderResponseDto(orderList.get(i).getRestaurant().getName(),
+                    foodResponseDtos,
+                    orderList.get(i).getRestaurant().getDeliveryFee()
+                    ,orderList.get(i).getTotalprice()));
+        }
+
+
+
+
+        return orderResponseDtos;
+    }
 }

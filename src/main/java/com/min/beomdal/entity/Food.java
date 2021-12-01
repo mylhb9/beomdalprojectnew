@@ -38,21 +38,11 @@ public class Food {
     @JoinColumn(name="restaurant_id")
     private Restaurant restaurant;
 
-    public Food(FoodDto foodDto) {
-        this.name = foodDto.getName();
-        this.price = foodDto.getPrice();
 
-
-    }
     public Food(FoodDto foodDto, Restaurant restaurant) {
         this.name = foodDto.getName();
         this.price = foodDto.getPrice();
         this.restaurant = restaurant;
     }
 
-    public Food(FoodResponseDto foodResponseDto, Restaurant restaurant) {
-        this.name = foodResponseDto.getName();
-        this.price= foodResponseDto.getPrice();
-        this.restaurant = restaurant;
-    }
 }

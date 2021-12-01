@@ -2,9 +2,7 @@ package com.min.beomdal;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -206,11 +204,13 @@ class OrderIntegrationTest {
         // then
         assertEquals(HttpStatus.OK, response.getStatusCode());
         OrderDto orderDto = response.getBody();
+
         assertNotNull(orderDto);
         // 음식점 이름
         assertEquals(registeredRestaurant.name, orderDto.restaurantName);
 
         // 음식 주문 확인
+        System.out.println(orderDto.foods);
         assertEquals(3, orderDto.foods.size());
         // 음식1 주문 확인
         FoodOrderDto foodOrder1 = orderDto.foods.stream()
@@ -402,7 +402,8 @@ class OrderIntegrationTest {
         // 총 결제 금액 확인
         assertEquals(40400, orderDto.totalPrice);
     }
-
+    @AllArgsConstructor
+    @NoArgsConstructor
     @Getter
     @Setter
     @Builder
@@ -410,7 +411,8 @@ class OrderIntegrationTest {
         private Long restaurantId;
         private List<FoodOrderRequestDto> foods;
     }
-
+    @AllArgsConstructor
+    @NoArgsConstructor
     @Getter
     @Setter
     @Builder
@@ -418,7 +420,8 @@ class OrderIntegrationTest {
         Long id;
         int quantity;
     }
-
+    @AllArgsConstructor
+    @NoArgsConstructor
     @Getter
     @Setter
     static class OrderDto {
@@ -427,7 +430,8 @@ class OrderIntegrationTest {
         private int deliveryFee;
         private int totalPrice;
     }
-
+    @AllArgsConstructor
+    @NoArgsConstructor
     @Getter
     @Setter
     static class FoodOrderDto {
@@ -435,7 +439,8 @@ class OrderIntegrationTest {
         int quantity;
         int price;
     }
-
+    @AllArgsConstructor
+    @NoArgsConstructor
     @Getter
     @Setter
     @Builder
@@ -445,7 +450,8 @@ class OrderIntegrationTest {
         private int minOrderPrice;
         private int deliveryFee;
     }
-
+    @AllArgsConstructor
+    @NoArgsConstructor
     @Getter
     @Setter
     @Builder
