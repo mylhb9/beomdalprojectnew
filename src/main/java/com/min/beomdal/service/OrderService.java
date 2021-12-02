@@ -44,7 +44,7 @@ public class OrderService {
                     foodResponseDtos.add(new FoodResponseDto(foodList.get(i).getName(),orderRequestDto.getFoods().get(j).getQuantity(),foodList.get(i).getPrice()));
                 }
             }
-
+        
         }
         for(int i=0; i<foodResponseDtos.size(); i++) {
             if(foodResponseDtos.get(i).getQuantity()<1 || foodResponseDtos.get(i).getQuantity()>100) {
@@ -85,22 +85,14 @@ public class OrderService {
         List<FoodResponseDto> foodResponseDtos = new ArrayList<>();
 
         for(int i=0; i< menuList.size(); i++) {
-
-
             foodResponseDtos.add(new FoodResponseDto(menuList.get(i).getFood().getName(), menuList.get(i).getQuantity(), menuList.get(i).getFood().getPrice() * menuList.get(i).getQuantity()));
-
         }
-
         for (int i=0; i<orderList.size(); i++) {
             orderResponseDtos.add(new OrderResponseDto(orderList.get(i).getRestaurant().getName(),
                     foodResponseDtos,
                     orderList.get(i).getRestaurant().getDeliveryFee()
                     ,orderList.get(i).getTotalprice()));
         }
-
-
-
-
         return orderResponseDtos;
     }
 }
